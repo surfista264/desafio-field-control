@@ -1,0 +1,25 @@
+<div class="formulario">
+  <input [(ngModel)]="novoTitulo" placeholder="Título da tarefa">
+  <input [(ngModel)]="novaDescricao" placeholder="Descrição">
+</div>
+
+<div class="kanban-container">
+  <div class="coluna" *ngFor="let item of kanban; let cIndex = index">
+    <h2>{{ item.nome }}</h2>
+    
+   <button class="btn-add" (click)="adicionarCard()">+ Criar Card</button>
+    
+
+    <div class="cards-list">
+      <div class="card" *ngFor="let card of item.cards; let i = index">
+        <h3>{{ card.titulo }}</h3>
+        <p>{{ card.descricao }}</p>
+        <small>Status: {{ item.nome }}</small>
+
+        <button *ngIf="cIndex > 0" (click)="voltarParaAnterior(cIndex, i)">⬅️ Voltar</button>
+        <button *ngIf="cIndex < kanban.length - 1" (click)="moverParaProxima(cIndex, i)"> Mover ➡️</button>
+        <button class="btn-delete" (click)="excluirCard(card)">🗑️ Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
